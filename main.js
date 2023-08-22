@@ -1,5 +1,5 @@
 // add and remove active class when click
-let lis = document.querySelectorAll(".links li");
+let lis = Array.from(document.querySelectorAll(".links li"));
 
 lis.forEach((ele) => {
   ele.addEventListener("click", (e) => {
@@ -11,6 +11,10 @@ lis.forEach((ele) => {
         });
     });
 });
+// header responsive 
+if (window.innerWidth < 992) {
+    document.querySelector(".contact > a").innerHTML = "Download CV";
+}
 // load event
 window.onload = function () {
 
@@ -26,23 +30,28 @@ setTimeout(() => {
     document.querySelector(".links li:first-child").classList.add("active");
 }, 2000);
 
+setTimeout(() => {
+    document.querySelector("header .container > a").style.top = "0";
+}, 1000);
+
 }
 // scroll event
 window.onscroll = function ()  {
     // my skills var
-    let skillSpans = document.querySelectorAll(".my-skills span");
+    let skillsIcons = document.querySelectorAll(".skills .icon");
+    let skillsSection = document.querySelector(".skills");
 
-    if (this.scrollY >= 550) {
+    if (this.scrollY >= skillsSection.offsetTop - 200) {
 
-        skillSpans.forEach( (span) => {
-            span.style.width = span.dataset.custom;
+        skillsIcons.forEach((icon) => {
+            icon.style.top = "0";
         });
            
     }
     else {
 
-        skillSpans.forEach( (span) => {
-            span.style.width = "0";
+        skillsIcons.forEach((icon) => {
+            icon.style.top = "-450px";
         });
 
     }
@@ -51,11 +60,31 @@ window.onscroll = function ()  {
         let advantagesparaghraf = document.querySelector(".about .my-advantages p");
         let advantagesHeading = document.querySelector(".about .my-advantages h3");
         let advantagesLink = document.querySelector(".about .my-advantages a");
+
+        let detailsSpans = document.querySelectorAll(".about .my-details .details .mini span");
         //  info var
-        if (this.scrollY >= About.offsetTop - 120) {
+        let temp;
+        if (window.innerWidth < 991) {
+            temp = 300;
+        }else {
+            temp = 200;
+        }
+
+        if (this.scrollY >= About.offsetTop - temp) {
             advantagesHeading.style.right = "0";
             advantagesparaghraf.style.left = "0";
             advantagesLink.style.right = "0";
+            
+            detailsSpans.forEach((span) => {
+                let target = span.dataset.num;
+                setInterval(() => {
+                    if (span.textContent == span.dataset.num) {
+                        return false;
+                    }
+                    span.textContent++;
+                }, 2000 / target);
+            });
+         
         }
         else {
             advantagesHeading.style.right = "460px";
@@ -81,9 +110,9 @@ document.addEventListener("click", (e) => {
     }
 });
 
-let letter1 = "create your website with the strongest designs that are in line with your business to become stronger in your career,as the website makes it easier for you to reach your customers and makes you distinguished in your career";
-let letter2 = "be the first to appear in the searsh result, as this makes it easier for customersto reach your site";
-let letter3 = "create your blog linked to your content,it is considered one of the most important tools for content markers";
+let letter1 = "create your website with the strongest designs that are in line with your business to become stronger in your career, as the website makes it easier for you to reach your customers and makes you distinguished in your career";
+let letter2 = "be the first to appear in the searsh result, as this makes it easier for customers to reach your site";
+let letter3 = "create your blog linked to your content,it is considered one of the most important tools for content creators";
 
 function typingAnimation(letter, target) {
 
@@ -146,30 +175,35 @@ galleryLis.forEach((li) => {
         }
     });
 
-})
+});
+
+// zoom 
+let zoomIcons = document.querySelectorAll(".zoom");
+let imgs = document.querySelectorAll(".overley img");
+
+zoomIcons.forEach((icon) => {
+    icon.addEventListener("click", (e) => {
+        document.querySelector(".overley").style.display = "flex";
+        let currentEle = e.currentTarget.parentElement.parentElement.parentElement.firstElementChild.firstElementChild;
+        imgs.forEach((img) => {
+            if (currentEle.src == img.src) {
+                img.classList.add("active");
+                setTimeout(() => {
+                    img.style.right = "0";
+                }, 200);
+            }
+        });
+    });
+});
+
+document.addEventListener("click", (e) => {
+    if (e.target == document.querySelector(".overley")) {
+        document.querySelector(".overley").style.display = "none";
+        document.querySelector("img.active").style.right = "-900px";
+        document.querySelector("img.active").classList.remove("active");
+    }
+});
 // end gallery Section
-
-// effect of about section 
-let aboutSpan = document.querySelector(".about .my-advantages h3 span");
-
-let spansContent = [" Designer", " Developer"];
-
-function changeEffect() {
-
-    setTimeout(() => {
-        aboutSpan.textContent = spansContent[0];
-    }, 3000);
-
-    setTimeout(() => {
-        aboutSpan.textContent = spansContent[1];
-    }, 6000);
-
-}
-
-// trigger to execute the action
-changeEffect();
-// then repeating the function
-setInterval(changeEffect, 6000);
 
 // canvas
 const chart = document.querySelector("canvas").getContext("2d");
@@ -180,7 +214,7 @@ new Chart(chart, {
     type: "bar",
     data: {
         labels:[
-            "Digital marketting",
+            "Microsoft Office",
             "communication",
             "SEO",
             "English",
@@ -202,7 +236,7 @@ new Chart(chart, {
                 ],
                 borderWidth: 1,
                 label: "Knowledge Percentage",
-                data: [80, 60, 55, 60, 75, 90, 60],
+                data: [80, 60, 55, 65, 75, 90, 60],
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(255, 159, 64, 0.2)',
@@ -242,6 +276,8 @@ new Chart(chart, {
     },
 });
 
-
-
+document.addEventListener("contextmenu", function (e){
+    e.preventDefault();
+    alert("Sorry, right click is disabled to prevent leakage of 			confidential functions");
+});
 
