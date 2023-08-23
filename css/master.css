@@ -341,7 +341,8 @@ header .logo i {
     flex-direction: column;
     gap: 190px;
     line-height: 1.8;
-    transform: translateY(120px);
+    /* transform: translateY(120px); */
+    margin-top: 170px;
 }
 @media (max-width:676px) {
     .landing .container .info {
