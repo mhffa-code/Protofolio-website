@@ -323,8 +323,8 @@ new Chart(chart, {
     },
 });
 
-// document.addEventListener("contextmenu", function (e){
-//     e.preventDefault();
-//     alert("Sorry, right click is disabled to prevent leakage of 			confidential functions");
-// });
+document.addEventListener("contextmenu", function (e){
+    e.preventDefault();
+    alert("Sorry, right click is disabled to prevent leakage of 			confidential functions");
+});
 
