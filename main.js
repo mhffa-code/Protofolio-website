@@ -12,8 +12,9 @@ lis.forEach((ele) => {
     });
 });
 // header responsive 
-if (window.innerWidth < 992) {
-    document.querySelector(".contact > a").innerHTML = "Download CV";
+if (window.innerWidth < 991) {
+    document.querySelector(".me a:first-child").innerHTML = "<i class=\"fa-solid fa-download\"></i> CV";
+
 }
 // load event
 window.onload = function () {
@@ -35,6 +36,39 @@ setTimeout(() => {
 }, 1000);
 
 }
+
+// landing animation 
+
+const animate = document.querySelector(".animate span");
+const sentences = ["Web Developer", "Front-end Developer"];
+
+let index = 0;
+let charIndex = 0;
+let isDeleting = false;
+
+
+const typingChanging = () => {
+    let currentSentence = sentences[index];
+    let currentChar = currentSentence.substring(0, charIndex);
+    animate.textContent = currentChar;
+
+    if (!isDeleting && charIndex < currentSentence.length) {
+        charIndex++;
+        setTimeout(typingChanging, 100);
+    }else if (isDeleting && charIndex > 0) {
+        charIndex--;
+        setTimeout(typingChanging, 100);
+    }else {
+        isDeleting = !isDeleting;
+        index = !isDeleting ? (index + 1) % sentences.length : index;
+        setTimeout(typingChanging, 1000);
+    }
+    
+
+}
+// trugger for typingChanging function 
+typingChanging();
+
 // scroll event
 window.onscroll = function ()  {
     // my skills var
@@ -71,10 +105,19 @@ window.onscroll = function ()  {
         }
 
         if (this.scrollY >= About.offsetTop - temp) {
+
             advantagesHeading.style.right = "0";
             advantagesparaghraf.style.left = "0";
             advantagesLink.style.right = "0";
-            
+
+         
+        }else {
+            advantagesHeading.style.right = "460px";
+            advantagesparaghraf.style.left = "650px";
+            advantagesLink.style.right = "220px";
+        }
+
+        if (this.innerWidth < 991 && this.scrollY >= 9656) {
             detailsSpans.forEach((span) => {
                 let target = span.dataset.num;
                 setInterval(() => {
@@ -82,14 +125,18 @@ window.onscroll = function ()  {
                         return false;
                     }
                     span.textContent++;
-                }, 2000 / target);
+                }, 3000 / target);
             });
-         
-        }
-        else {
-            advantagesHeading.style.right = "460px";
-            advantagesparaghraf.style.left = "650px";
-            advantagesLink.style.right = "220px";
+        }else if (this.innerWidth > 991 && this.scrollY >= About.offsetTop - temp) {
+            detailsSpans.forEach((span) => {
+                let target = span.dataset.num;
+                setInterval(() => {
+                    if (span.textContent == span.dataset.num) {
+                        return false;
+                    }
+                    span.textContent++;
+                }, 3000 / target);
+            });
         }
 
 }
@@ -114,7 +161,7 @@ let letter1 = "create your website with the strongest designs that are in line w
 let letter2 = "be the first to appear in the searsh result, as this makes it easier for customers to reach your site";
 let letter3 = "create your blog linked to your content,it is considered one of the most important tools for content creators";
 
-function typingAnimation(letter, target) {
+function typingAnimation(letter, target, time) {
 
     let array = [];
     let selector = document.querySelector(target);
@@ -124,7 +171,7 @@ function typingAnimation(letter, target) {
         array.push(letter[counter]);
         counter++;
         selector.textContent = array.join("");
-    }, 50);
+    }, time);
 
 }
 
@@ -133,17 +180,17 @@ document.querySelectorAll(".service-box").forEach((box) => {
     box.addEventListener("click", (e) => {
         if (e.currentTarget === document.querySelectorAll(".service-box")[0]) {
             if (document.querySelector(".web-Dev").textContent == "") {
-                typingAnimation(letter1, ".web-Dev");
+                typingAnimation(letter1, ".web-Dev", 50);
             }
         }
         if (e.currentTarget === document.querySelectorAll(".service-box")[1]) {
             if (document.querySelector(".marketting").textContent == "") {
-                typingAnimation(letter2, ".marketting");
+                typingAnimation(letter2, ".marketting", 50);
             }
         }
         if (e.currentTarget === document.querySelectorAll(".service-box")[2]) {
             if (document.querySelector(".e-blogs").textContent == "") {
-                typingAnimation(letter3, ".e-blogs");
+                typingAnimation(letter3, ".e-blogs", 50);
             }
         }
     });
@@ -276,8 +323,8 @@ new Chart(chart, {
     },
 });
 
-document.addEventListener("contextmenu", function (e){
-    e.preventDefault();
-    alert("Sorry, right click is disabled to prevent leakage of 			confidential functions");
-});
+// document.addEventListener("contextmenu", function (e){
+//     e.preventDefault();
+//     alert("Sorry, right click is disabled to prevent leakage of 			confidential functions");
+// });
 
