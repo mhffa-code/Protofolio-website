@@ -13,10 +13,16 @@ lis.forEach((ele) => {
 });
 // header menu 
 let bars = document.querySelector(".fa-bars");
+let menuCont = document.querySelector(".me");
+let header = document.querySelector("header");
 
 bars.addEventListener("click", () => {
-    document.querySelector(".me").classList.toggle("toggler");
-    document.querySelector("header").style.overflow = "visible";
+    menuCont.classList.toggle("toggler");
+    if (menuCont.classList.contains("toggler")) {
+        header.style.overflow = "visible";
+    }else {
+        header.style.overflow = "hidden";
+    }
 });
 
 // load event
