@@ -11,13 +11,24 @@ lis.forEach((ele) => {
         });
     });
 });
-// header responsive 
-if (window.innerWidth < 991) {
-    document.querySelector(".me a:first-child").innerHTML = "<i class=\"fa-solid fa-download\"></i> CV";
+// header menu 
+let bars = document.querySelector(".fa-bars");
 
-}
+bars.addEventListener("click", () => {
+    document.querySelector(".me").classList.toggle("toggler");
+    document.querySelector("header").style.overflow = "visible";
+});
+
 // load event
 window.onload = function () {
+    // check to change BG
+    if (innerWidth < 991) {
+        if (localStorage.getItem("color") == "#00ccff") {
+            document.querySelector(".landing").style.backgroundImage = "none";
+        } else if (localStorage.getItem("color") == "#8a2be2") {
+            document.querySelector(".landing").style.cssText = "background-color: url(../images/1680062509034\ -\ Copy.jpg);";
+        }
+    }
 
 document.querySelector(".logo").style.opacity = "1";
 
@@ -38,7 +49,6 @@ setTimeout(() => {
 }
 
 // landing animation 
-
 const animate = document.querySelector(".animate span");
 const sentences = ["Web Developer", "Front-end Developer"];
 
@@ -63,11 +73,24 @@ const typingChanging = () => {
         index = !isDeleting ? (index + 1) % sentences.length : index;
         setTimeout(typingChanging, 1000);
     }
-    
 
 }
 // trugger for typingChanging function 
 typingChanging();
+
+// number counter function 
+function numCounter(selector) {
+    let detailsSpans = document.querySelectorAll(selector);
+    detailsSpans.forEach((span) => {
+        let target = span.dataset.num;
+        setInterval(() => {
+            if (span.textContent == span.dataset.num) {
+                return false;
+            }
+            span.textContent++;
+        }, 3000 / target);
+    });
+}
 
 // scroll event
 window.onscroll = function ()  {
@@ -80,7 +103,7 @@ window.onscroll = function ()  {
         skillsIcons.forEach((icon) => {
             icon.style.top = "0";
         });
-           
+         
     }
     else {
 
@@ -95,7 +118,6 @@ window.onscroll = function ()  {
         let advantagesHeading = document.querySelector(".about .my-advantages h3");
         let advantagesLink = document.querySelector(".about .my-advantages a");
 
-        let detailsSpans = document.querySelectorAll(".about .my-details .details .mini span");
         //  info var
         let temp;
         if (window.innerWidth < 991) {
@@ -117,26 +139,10 @@ window.onscroll = function ()  {
             advantagesLink.style.right = "220px";
         }
 
-        if (this.innerWidth < 991 && this.scrollY >= 9656) {
-            detailsSpans.forEach((span) => {
-                let target = span.dataset.num;
-                setInterval(() => {
-                    if (span.textContent == span.dataset.num) {
-                        return false;
-                    }
-                    span.textContent++;
-                }, 3000 / target);
-            });
-        }else if (this.innerWidth > 991 && this.scrollY >= About.offsetTop - temp) {
-            detailsSpans.forEach((span) => {
-                let target = span.dataset.num;
-                setInterval(() => {
-                    if (span.textContent == span.dataset.num) {
-                        return false;
-                    }
-                    span.textContent++;
-                }, 3000 / target);
-            });
+        if (this.innerWidth < 667 && this.scrollY >= 9656) {
+            numCounter(".about .my-details .details .mini span");
+        }else if (this.innerWidth > 667 && this.scrollY >= About.offsetTop - temp) {
+            numCounter(".about .my-details .details .mini span");
         }
 
 }
@@ -159,7 +165,7 @@ document.addEventListener("click", (e) => {
 
 let letter1 = "create your website with the strongest designs that are in line with your business to become stronger in your career, as the website makes it easier for you to reach your customers and makes you distinguished in your career";
 let letter2 = "be the first to appear in the searsh result, as this makes it easier for customers to reach your site";
-let letter3 = "create your blog linked to your content,it is considered one of the most important tools for content creators";
+let letter3 = "create your blog linked to your content, it is considered one of the most important tools for content creators";
 
 function typingAnimation(letter, target, time) {
 
@@ -323,8 +329,46 @@ new Chart(chart, {
     },
 });
 
+// change color control
+
+if (innerWidth < 991) 
+{
+let lisOfColors = document.querySelectorAll(".change-theme ul li");
+let listBtn = document.querySelector(".change-theme span");
+let listBtnIcon = document.querySelector(".change-theme span i");
+let list = document.querySelector(".change-theme ul");
+
+listBtn.addEventListener("click", () => {
+    list.classList.toggle("active");
+    listBtnIcon.classList.toggle("active");
+});
+
+
+lisOfColors.forEach(element => {
+    element.addEventListener("click", (e) => {
+        lisOfColors.forEach((ele) => {
+            ele.classList.remove("active");
+        });
+        e.currentTarget.classList.add("active");
+        localStorage.setItem("color", e.currentTarget.dataset.color);
+        localStorage.setItem("color2", e.currentTarget.dataset.color2);
+        document.body.style = `--main-color: ${localStorage.getItem("color")}; --main2-color: ${localStorage.getItem("color2")};`;
+        if (localStorage.getItem("color") == "#00ccff") {
+            document.querySelector(".landing").style.backgroundImage = "none";
+        } else if (localStorage.getItem("color") == "#8a2be2") {
+            document.querySelector(".landing").style.cssText = "background-color: url(../images/1680062509034\ -\ Copy.jpg);";
+        }
+    });
+});
+
+
+if (localStorage.getItem("color")) {
+    document.body.style = `--main-color: ${localStorage.getItem("color")}; --main2-color: ${localStorage.getItem("color2")};`;
+}
+
+}
+
 document.addEventListener("contextmenu", function (e){
     e.preventDefault();
     alert("Sorry, right click is disabled to prevent leakage of 			confidential functions");
 });
-

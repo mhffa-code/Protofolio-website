@@ -15,7 +15,9 @@
     --second-color: #00ccff; 
     --background-color-section: rgb(1 1 55);
     --white-color: white;
+    --main2-color:#8a2be2;
 }
+
 html{
     scroll-behavior: smooth;
 }
@@ -133,9 +135,14 @@ header .container {
         flex-direction: column;
     }
 }
+@media (min-width: 766px) and (max-width: 991px) {
+   header .container {
+        flex-direction: column;
+    }
+}
 .logo {
-    color: #8a2be2;
-    text-shadow: 0px 1px 3px #8a2be2;
+    color: var(--main-color);
+    text-shadow: 0px 1px 3px var(--main-color);
     font-size: 24px;
     font-weight: bold;
     opacity: 0;
@@ -184,6 +191,14 @@ header .links li {
     overflow: hidden;
     bottom: -60px;
 }
+@media (min-width: 767px) and (max-width:991px) {
+    header .links li {
+        padding: 12px 10px;
+    }
+    header .links {
+        height: 50px;
+    }
+}
 @media (max-width: 767px) {
     header .links li{
          padding: 10px 0;
@@ -218,7 +233,7 @@ header .links li {
 }
 .links .active a {
     color: var(--main-color);
-    text-shadow: 0px 1px 3px #8a2be2;
+    text-shadow: 0px 1px 3px var(--main-color);
 }
 .links .active::before {
     left: 0;
@@ -228,7 +243,7 @@ header .links li {
 }
 .links li:hover a {
     color: var(--main-color);
-    text-shadow: 0px 1px 3px #8a2be2;
+    text-shadow: 0px 1px 3px var(--main-color);
 }
 .links li a {
     color: white;
@@ -255,6 +270,9 @@ header .links li {
     position: relative;
     top: -80px;
 }
+header .container > a i {
+    margin-right: 5px;
+}
 @media (MIN-WIDTH: 992px) {
     header .container > a {
         display: inline;
@@ -268,6 +286,83 @@ header .logo i {
      color: var(--main-color);
      margin: auto 0 auto 15px;
      animation: 3s rotate3d infinite linear;
+}
+.header-top {
+    display: flex;
+    justify-content: space-between;
+    width: 346px;
+    align-items: center;
+    padding: 10px 0;
+}
+.header-top .me {
+    display: flex;
+    flex-direction: column;
+    list-style: none;
+    background-color: #01014b;
+    position: absolute;
+    right: 0;
+    bottom: -130px;
+    z-index: -10000;
+    opacity: 0;
+    transition: var(--main-transition);
+}
+
+.me.toggler {
+    opacity: 1;
+    z-index: 10000;
+}
+
+.header-top .me li {
+    display: flex;
+    align-items:center ;
+    transition: 0.8s;
+}
+
+.header-top .me li:first-child {
+    border-bottom: 1px solid white;
+}
+
+.header-top .me li a {
+    width: 145px;
+    padding: 20px 40px;
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.8s;
+}
+
+
+.header-top .me li  i {
+    color: var(--main-color);
+    font-size: 20px;
+
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .header-top {
+        padding: 30px 0;
+        width: 475px;
+    }
+}
+.header-top .menu {
+    position: relative;
+}
+.header-top .menu > i {
+    color: white;
+    font-size: 24px;
+    cursor: pointer;
+    border: 1px solid var(--main-color);
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(1 0 76);
+}
+@media (min-width: 992px) {
+    .header-top > .menu {
+        display: none;
+    }
+    .header-top {
+        width: fit-content;
+    }
 }
 @keyframes rotate3d {
     from {
@@ -293,7 +388,7 @@ header .logo i {
 @media (max-width: 676px) {
     .landing {
         background-image: url(../images/1680062509034\ -\ Copy.jpg);
-        transform: translateY(40px);
+        transform: translateY(50px);
     }
 }
 .landing .container {
@@ -341,12 +436,13 @@ header .logo i {
     flex-direction: column;
     gap: 190px;
     line-height: 1.8;
-    margin-top: 170px;
+    margin-top: 190px;
     position: relative;
 }
 @media (max-width:676px) {
     .landing .container .info {
         margin-bottom: 50px;
+        margin-top: 170px;
     }
 }
 .landing .container .info p:first-child {
@@ -384,9 +480,10 @@ header .logo i {
 @media (max-width:676px) {
     .landing .container .info .animate {
         font-size: 24px;
+        margin-top: 30px;
     }
 }
-.landing .container .info p:last-child span {
+.landing .container .info .animate span {
     color: var(--main-color);
     text-shadow: 1px 1px 6px var(--main-color);
     font-size: 30px;
@@ -394,7 +491,7 @@ header .logo i {
     position: relative;
 }
 
-.landing .container .info p:last-child span::after {
+.landing .container .info .animate span::after {
     content: "";
     position: absolute;
     right: -10px;
@@ -415,87 +512,49 @@ header .logo i {
 }
 
 @media (max-width:676px) {
-    .landing .container .info p:last-child span {
-        font-size: 26px;
+    .landing .container .info .animate span {
+        font-size: 25px;
     }
 }
 .landing .container .contact {
    transform: translateY(-150px);
    margin-top: 80px;
 }
-.me {
-    display: flex;
-    justify-content: space-between;
+
+.landing .container .contact > a {
+    padding: 10px 25px;
+    display: block;
+    color: white;
+    background-image: linear-gradient(to top, var(--main-color), #bd2be2);
+    text-decoration: none;
+    transition: var(--main-transition);
+    border-radius: 15px;
+    width: fit-content;
 }
 
-.landing .container .contact .me  a:first-child {
-    padding: 10px 20px;
-    width: fit-content;
-    border-radius: 15px;
-    transition: var(--main-transition);
-    background-image: linear-gradient(to top, var(--main-color), #bd2be2);
-    box-shadow: 1px 1px 6px var(--main-color);
-    color: white;
-    text-decoration: none;
-    text-align: center;
+.landing .container .contact > a:hover {
+    box-shadow: 1px 1px 10px 1px var(--main-color);
+}
 
+.landing .container .contact > a i {
+    margin-right: 5px;
 }
 
 @media (max-width: 991px) {
-    .landing .container .contact .me  a:first-child {
-        display: inline-block;
-        background-image: linear-gradient(to top, var(--main-color), #bd2be2) !important;
-        padding: 10px 0;
-        border-radius: 40px;
-        border: 1px solid var(--main-color);
-        transition: var(--main-transition);
-        background-image: none;
-        box-shadow: none;
-        color: white;
-        text-decoration: none;
-        margin-right: 20px;
-        width: 140px;
-        text-align: center;
-    
+    .landing .container .contact > a {
+        display: none;
     }
-    .landing .container .contact .me  a:first-child i {
-        color: white;
-    }
-    .landing .container .contact .me  a:last-child:hover {
-        transition: var(--main-transition);
-        background-image: linear-gradient(to top, var(--main-color), #bd2be2);
-        box-shadow: 1px 1px 6px var(--main-color);
-    }
-    .landing .container .contact .me  a i {
-        color: var(--main-color);
-        margin-right: 5px;
-    }
-    .landing .container .contact .me  a:hover i {
-        color: white;
-    }
-}
-.landing .container .contact .me  a:last-child {
-    padding: 10px 0;
-    border-radius: 40px;
-    transition: var(--main-transition);
-    color: white;
-    text-decoration: none;
-    margin-right: 20px;
-    border: 1px solid var(--main-color);
-    width: 140px;
-    text-align: center;
 
-}
-
-@media (min-width: 991px) {
-     .landing .container .contact .me  a:last-child {
-         display: none;
-     }
 }
 .landing .container .contact .My-links {
    margin-top: 50px;
    width: fit-content;
    display: flex;
+}
+@media (max-width: 991px) {
+    .landing .container .contact .My-links {
+        margin-top: 10px;
+    }
 }
 .landing .container .contact .My-links a {
     display: flex;
@@ -509,7 +568,7 @@ header .logo i {
     border: 1px solid var(--main-color);
 }
 .landing .container .contact .My-links a:hover {
-    background-image: linear-gradient(to top, var(--main-color), #bd2be2);
+    background-image: linear-gradient(to top, var(--main-color), var(--main2-color));
 }   
 .landing .container .contact .My-links i {
     transition: var(--main-transition);
@@ -746,7 +805,7 @@ header .logo i {
     font-size: 18px;
     color: white;
     margin: auto 10px;
-    background-color: var(--main-color);
+    background-color: var(--main2-color);
 }
 .services .container .service-box .back p {
     margin: auto 10px;
@@ -818,7 +877,7 @@ header .logo i {
     margin-right: 15px;
 }
 .gallery ul li.active {
-    background-image: linear-gradient(to top, var(--main-color), #bd2be2);
+    background-image: linear-gradient(to top, var(--main-color), var(--main2-color));
     box-shadow: 1px 1px 10px 1px var(--main-color);
 }
 .gallery .container {
@@ -828,6 +887,13 @@ header .logo i {
     justify-content: flex-start;
     gap: 2em;
 }
+
+@media (min-width: 678px) and (max-width: 991px) {
+    .gallery .container {
+        justify-content: center;
+    }
+}
+
 .gallery .container .box {
     position: relative;
     overflow: hidden;
@@ -1066,7 +1132,7 @@ header .logo i {
 .about .container .my-advantages a {
     text-decoration: none;
     color: white;
-    background-image: linear-gradient(to top, var(--main-color), #bd2be2);
+    background-image: linear-gradient(to top, var(--main-color), var(--main2-color));
     padding: 10px 20px;
     border-radius: 8px;
     font-weight: bold;
@@ -1129,7 +1195,7 @@ header .logo i {
     border-radius: 10px;
     display: block;
     margin-right: 20px;
-    background-image: linear-gradient(to top, var(--main-color), #bd2be2);
+    background-image: linear-gradient(to top, var(--main-color), var(--main2-color));
     box-shadow: 1px 1px 5px var(--main-color);
 }
 .about .container .my-details .details:last-child a {
@@ -1257,4 +1323,85 @@ header .logo i {
     background-color: var(--main-color);
     border-radius: 10px;
     box-shadow: 0px 2px 20px 20px var(--main-color);
+}
+
+.gallery .info > a {
+    display: block;
+    padding: 5px 12px;
+    margin: 5px 0 20px;
+    color: white;
+    background-color: var(--main-color);
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    width: fit-content;
+    border-radius: 6px;
+}
+
+/* change color */
+.change-theme {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    background-color: rgb(8 8 92);
+}
+
+@media (min-width: 992px) {
+    .change-theme {
+        display: none;
+    }
+}
+
+.change-theme span {
+    font-size: 24px;
+    color: white;
+    padding: 10px 12px;
+    background-color: rgb(8 8 92);
+}
+
+.change-theme span i {
+    transition: var(--main-transition);
+}
+
+.change-theme span i.active {
+    transform: rotate(180deg);
+} 
+
+.change-color.active {
+    display: flex;
+}
+
+.change-color {
+    display: none;
+    flex-direction: column;
+    align-items: center; 
+    list-style: none;
+    gap: 10px;
+    padding: 20px 10px;
+}
+
+.change-color li {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+.change-color li:first-child.active {
+    box-shadow: 0 0 5px 1px #8a2be2;
+}
+.change-color li:last-child.active {
+    box-shadow: 0 0 5px 1px #00ccff;
+}
+.change-color li.active {
+    opacity: 1;
+}
+
+.change-color li:first-child {
+    background-color: #8a2be2;
+}
+.change-color li:last-child {
+    background-color: #00ccff;
 }
