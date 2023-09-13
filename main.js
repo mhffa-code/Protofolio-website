@@ -145,7 +145,7 @@ window.onscroll = function ()  {
             advantagesLink.style.right = "220px";
         }
 
-        if (this.innerWidth < 667 && this.scrollY >= 9656) {
+        if (this.innerWidth < 667 && this.scrollY >= About.offsetTop + 200) {
             numCounter(".about .my-details .details .mini span");
         }else if (this.innerWidth > 667 && this.scrollY >= About.offsetTop - temp) {
             numCounter(".about .my-details .details .mini span");
