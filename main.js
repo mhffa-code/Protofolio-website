@@ -58,7 +58,7 @@ setTimeout(() => {
 
 // landing animation 
 const animate = document.querySelector(".animate span");
-const sentences = ["Web Developer", "Front-end Developer"];
+const sentences = ["Web Developer", "Front-end Developer", "UI Developer"];
 
 let index = 0;
 let charIndex = 0;
