@@ -52,6 +52,8 @@ setTimeout(() => {
     document.querySelector("header .container > a").style.top = "0";
 }, 1000);
 
+
+
 }
 
 // landing animation 
@@ -278,7 +280,7 @@ new Chart(chart, {
             "SEO",
             "English",
             "Social Media mangment",
-            "Proplem solving",
+            "Problem solving",
             "operating system"
         ],
         datasets: [
@@ -373,6 +375,14 @@ if (localStorage.getItem("color")) {
 }
 
 }
+
+// pre loader
+window.addEventListener("load", () => {
+    let preLoader = document.querySelector(".preloader");
+    preLoader.style.display = "none";
+
+    document.body.removeChild(preLoader);
+});
 
 document.addEventListener("contextmenu", function (e){
     e.preventDefault();
